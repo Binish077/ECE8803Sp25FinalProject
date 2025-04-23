@@ -7,5 +7,5 @@
 # python3 analysis.py
 
 # For when testing with OLIVES
-python3 train.py --batch_size 128 --model 'resnet18' --dataset 'OLIVES' --epochs 5 --device 'cpu' --train_image_path './OLIVES' --test_image_path './RECOVERY' --test_csv_path './csv_dir/test_set_submission_template.csv' --train_csv_path './csv_dir/Training_Biomarker_Data.csv'
+python3 train.py --batch_size 128 --model 'resnet18' --dataset 'OLIVES' --epochs 5 --device 'cuda' --train_image_path './OLIVES' --test_image_path './RECOVERY' --test_csv_path './csv_dir/test_set_submission_template.csv' --train_csv_path './csv_dir/Training_Biomarker_Data.csv'
 python3 analysis.py
