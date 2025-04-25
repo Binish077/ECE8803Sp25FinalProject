@@ -1,22 +1,14 @@
-# VIP CUP 2023 OLIVES Biomarker Detection
+# ECE 8803 Spring 2025 Final Project - OLIVES Biomarker Detection
 
 
 ***
 
-This work was done in the [Omni Lab for Intelligent Visual Engineering and Science (OLIVES) @ Georgia Tech](https://ghassanalregib.info/). 
-This competition is based on the [OLIVES](https://proceedings.neurips.cc/paper_files/paper/2022/hash/3be60b4a739b95a07a944a1a2c41e05e-Abstract-Datasets_and_Benchmarks.html) dataset published at NeurIPS 2022.
-Feel free to check our lab's [Website](https://ghassanalregib.info/publications) 
-and [GitHub](https://github.com/olivesgatech) for other interesting work!!!
+This work was done based on research by [Omni Lab for Intelligent Visual Engineering and Science (OLIVES) @ Georgia Tech](https://ghassanalregib.info/). 
+This project is based on the competition from [OLIVES](https://proceedings.neurips.cc/paper_files/paper/2022/hash/3be60b4a739b95a07a944a1a2c41e05e-Abstract-Datasets_and_Benchmarks.html) dataset published at NeurIPS 2022.
 
 ***
-
-## Citation
-
-Prabhushankar, M., Kokilepersaud, K., Logan, Y. Y., Trejo Corona, S., AlRegib, G., & Wykoff, C. (2022). Olives dataset: Ophthalmic labels for investigating visual eye semantics. Advances in Neural Information Processing Systems, 35, 9201-9216.
 
 ## Data
-
-The data for this competition can be downloaded at ...
 
 Training_Biomarker_Data.csv : Biomarker labels in training set.
 
@@ -29,21 +21,41 @@ PRIME_FULL and TREX DME are the training sets.
 
 RECOVERY is the test set. The ground truth biomarker labels are held out, but the images and clinical data are provided.
 
-## Submission
-
-To submit please fill out the provided template using the model output for each image in the test set. 
-There should be the file path followed by a one or zero for the presence or absenece of each of 6 biomarkers for the associated image.
-
-Submit this csv file to the following server ...
-
 ## Starter Code Usage
 
-
+```bash
 python train.py --batch_size 128 --model 'resnet18' --dataset 'OLIVES' --epochs 1 --device 'cuda:0' --train_image_path '' --test_image_path '' --test_csv_path './csv_dir/test_set_submission_template.csv' --train_csv_path './csv_dir/Training_Biomarker_Data.csv'
+```
 
-Fill this out with the appropriate file path fields for the training and test data to train a model and produce a numpy 
-that can act as a valid submission once the file paths are appended and saved as a csv.
+## Model Options
+The model that is trained can be changed using the `--model` argument:
+- EnhancedResnet
+
+## To test against the RECOVERY dataset
+To evaluate the model against the RECOVERY dataset:
+- Uncomment line 127 in `train.py`:  
+  ```python
+  # train_loader, test_loader = set_loader(opt)
+  ```
+- Comment out line 130:  
+  ```python
+  train_loader, test_loader = set_loader_val(opt)
+  ```
+- Comment out line 147:  
+  ```python
+  evaluate_model(test_loader, model, opt)
+  ```
+- Uncomment line 150:  
+  ```python
+  # submission_generate(test_loader, model, opt)
+  ```
+- Ensure the dataset is loaded using the `set_loader` function from `utils.py`, **not** `set_loader_val`.
+
+- Vice versa can be done to use a 80/20 train-test split to evaluate the model instead.
+
 ### Acknowledgements
 
 This work was done in collaboration with the [Retina Consultants of Texas](https://www.retinaconsultantstexas.com/).
 This codebase utilized was partly constructed with code from the [Supervised Contrastive Learning](https://github.com/HobbitLong/SupContrast) Github.
+The datasets used in this project are from the work provided by Prabhushankar, M., Kokilepersaud, K., Logan, Y. Y., Trejo Corona, S., AlRegib, G., \& Wykoff, C. (2022). Olives dataset: Ophthalmic labels for investigating visual eye semantics. Advances in Neural Information Processing Systems, 35, 9201-9216.
+This project was based on the [OLIVES] 2023 IEEE SPS Video and Image Processing Cup (VIP Cup) on Ophthalmic Biomarker Detection competition. We thank the organizers of the competition for providing resources to innovate and explore the field of medical image deep learning.
