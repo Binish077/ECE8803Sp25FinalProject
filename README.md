@@ -28,8 +28,11 @@ python train.py --batch_size 128 --model 'resnet18' --dataset 'OLIVES' --epochs 
 ```
 
 ## Model Options
-The model that is trained can be changed using the `--model` argument:
-- EnhancedResnet
+The model that is utilized can be changed using the `--model` argument:
+- Enhanced ResNet-50: `'eresnet50'`
+- ResNet-50: `'resnet50'`
+- ResNet-18: `'resnet18'`
+- EfficientNet-b0-T: `'efficientnet-t'`
 
 ## To test against the RECOVERY dataset
 To evaluate the model against the RECOVERY dataset:
